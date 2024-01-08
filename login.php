@@ -22,7 +22,17 @@
             }
             else
             {
-                echo"Failed!";
+                echo"
+                <div class='alert alert-danger alert-dismissible fade show'>
+                
+                    <button type=button' class='btn-close' data-bs-dismiss='alert'></button>
+                
+                    <div >
+                    <strong>Login failed! Please <button  class = 'btn btn-primary'><a href='signin.php' class = 'text-white text-decoration-none'>Sign In</a></button> first!</strong>
+                    </div>
+                
+                </div>
+                " ;
             }
             
         }
