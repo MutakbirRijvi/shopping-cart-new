@@ -9,44 +9,49 @@
     </head>
 <body>
     <?php 
-    if(!empty($_POST['submitted']))
-    {
-        if($_POST['submitted']=="true")
+    if($_SERVER['REQUEST_METHOD']=="POST")
     {
         if(isset($_POST['email']))
         {
             //$user_id  = $_GET['user_id'];
-            if(empty($_POST['email']))
-            {
-                $emailerror = "Please enter your Email!";
-            }
-            else{
-                $email = $_POST['email'];
-            }   
-            
-            
-            if(empty($_POST['pass']))
-            {
-                $passerror = "Please enter your password!";
-            }
-            else{
-                $pass = $_POST['pass'];
-            }    
-            
-            $sql = "SELECT * FROM user WHERE email = '$email' AND pass = '$pass'";
-            $query = $conn->query($sql);
-            if(mysqli_num_rows($query)>0)
-            {
-                header('location:index.php');
-            }
-            else
-            {
-                echo"Failed!";
-            }
-            
-        }
         
-    }
+                $email = $_POST['email'];
+             
+            
+            
+        
+                $pass = $_POST['pass'];
+           
+            //$sql = "SELECT * FROM user WHERE email = '$email' AND pass = 'password_verify($pass,$cpass)'";
+            $sql = "SELECT * FROM user WHERE email = '$email'";
+            $query = $conn->query($sql);
+            $num = mysqli_num_rows($query);
+            if($num == 1)
+            {
+                while($row = mysqli_fetch_assoc($query))
+                {
+                    if(password_verify($pass,$row['pass']))
+                    {
+                        header('location:index.php');
+                    }
+                    else
+                    {
+                    $Failed = "<div class = 'row alert alert-danger alert-dismissible fade show'>
+                    <div class = 'col-sm-11'><p>Incorrect Email or password!</p></div>
+                    <div class='col-sm-1'>
+                    <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+                    </div>
+                    </div>";
+                    }
+                
+                ;
+                
+                 }
+            
+            
+            }
+        
+        }
     }
     
         
@@ -63,16 +68,16 @@
         <br>
     <form action = "login.php" method = "post"> 
     <div class="mb-3 row">
+    <span><?php if(isset($Failed)) echo $Failed;?></span>    
     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-    <span><?php echo $emailerror;?></span>
     <input type="email" name="email" class="form-control col-sm-10" placeholder="Your email" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
   </div>
   <div class="mb-3 row">
     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-    <span><?php echo $passerror;?></span>
+    
     <input type="password" name="pass" class="form-control col-sm-10" placeholder="Your password" aria-label="Password" aria-describedby="basic-addon1" size="20" />
     </div>
   </div>
