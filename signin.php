@@ -87,6 +87,7 @@
                     $email      = filter_var($email,        FILTER_SANITIZE_EMAIL);
                     $pass   = filter_var($pass,     FILTER_SANITIZE_STRING);
                     $pass   = password_hash($pass,PASSWORD_DEFAULT );
+                    
                 }
                 }
           
@@ -146,7 +147,7 @@
     <span><?php if(isset($firstnameerror)) echo $firstnameerror;?></span>
     <label for="inputEmail" class="col-sm-2 col-form-label">First name</label>
     <div class="col-sm-10">
-    <input type="text" name="firstname" class="form-control col-sm-10" placeholder="Your first name" aria-label="Email" aria-describedby="basic-addon1" size="20" />
+    <input type="text" name="firstname" class="form-control col-sm-10 w-25" placeholder="Your first name" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
     </div>
     <br>
@@ -154,7 +155,7 @@
     <span><?php if(isset($lastnameerror)) echo $lastnameerror;?></span>
     <label for="inputEmail" class="col-sm-2 col-form-label">Last name</label>
     <div class="col-sm-10">
-    <input type="text" name="lastname" class="form-control col-sm-10" placeholder="Your last name" aria-label="Email" aria-describedby="basic-addon1" size="20" />
+    <input type="text" name="lastname" class="form-control col-sm-10 w-25" placeholder="Your last name" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
     </div>
     <br>
@@ -163,7 +164,7 @@
     <span><?php if(isset($emailerror))echo $emailerror;?></span>
     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-    <input type="email" name="email" class="form-control col-sm-10" placeholder="Your email" aria-label="Email" aria-describedby="basic-addon1" size="20" />
+    <input type="email" name="email" class="form-control col-sm-10 w-25" placeholder="Your email" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
     </div>
     <br>
@@ -171,7 +172,7 @@
     <span><?php if(isset($passerror)) echo $passerror;?></span>
     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
-    <input type="password" name="pass" class="form-control col-sm-10" placeholder="Your password" aria-label="Password" aria-describedby="basic-addon1" size="20" />
+    <input type="password" name="pass" class="form-control col-sm-10 w-25" placeholder="Your password" aria-label="Password" aria-describedby="basic-addon1" size="20" />
     </div>
   </div><br><br>
     <input type = "submit" class = "btn btn-primary" value ="Sign In">

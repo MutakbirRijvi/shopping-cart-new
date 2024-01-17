@@ -13,10 +13,10 @@ include('connection.php');
 <html>
 
 <?php
-if(isset($_GET['user_id']))
+if(isset($_GET['id']))
                 {
-                    $user_id = $_GET['user_id'];
-                    $sql1 = "DELETE FROM user WHERE user_id = $user_id";
+                    $id = $_GET['id'];
+                    $sql1 = "DELETE FROM catagory WHERE id = $id";
                     $delete = mysqli_query($conn,$sql1);
                     if($delete)
                 {
@@ -30,7 +30,7 @@ if(isset($_GET['user_id']))
                     </div>
 
                     ";
-                    header('location:userlist.php');
+                    header('location:list_of_catagory.php');
                 }
                 }
 

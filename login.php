@@ -16,10 +16,6 @@
             //$user_id  = $_GET['user_id'];
         
                 $email = $_POST['email'];
-             
-            
-            
-        
                 $pass = $_POST['pass'];
            
             //$sql = "SELECT * FROM user WHERE email = '$email' AND pass = 'password_verify($pass,$cpass)'";
@@ -32,7 +28,18 @@
                 {
                     if(password_verify($pass,$row['pass']))
                     {
-                        header('location:index.php');
+                        
+                        header("location:index.php");
+                        
+                    }
+                    else if(empty($email) && empty($pass))
+                    {
+                        $empty = "<div class = 'row alert alert-danger alert-dismissible fade show'>
+                        <div class = 'col-sm-11'><p>Insert Email or password!</p></div>
+                        <div class='col-sm-1'>
+                        <button type='button' class='btn-close' data-bs-dismiss='alert'></button>
+                        </div>
+                        </div>";
                     }
                     else
                     {
@@ -43,8 +50,6 @@
                     </div>
                     </div>";
                     }
-                
-                ;
                 
                  }
             
@@ -66,19 +71,20 @@
     <div class = "container">
         <h3>Login</h3>
         <br>
-    <form action = "login.php" method = "post"> 
+    <form action = "login.php" method = "POST"> 
     <div class="mb-3 row">
+    <span><?php if(isset($empty)) echo $empty;?></span>    
     <span><?php if(isset($Failed)) echo $Failed;?></span>    
     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
     <div class="col-sm-10">
-    <input type="email" name="email" class="form-control col-sm-10" placeholder="Your email" aria-label="Email" aria-describedby="basic-addon1" size="20" />
+    <input type="email" name="email" class="form-control col-sm-10 w-25" placeholder="Your email" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
   </div>
   <div class="mb-3 row">
     <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
     <div class="col-sm-10">
     
-    <input type="password" name="pass" class="form-control col-sm-10" placeholder="Your password" aria-label="Password" aria-describedby="basic-addon1" size="20" />
+    <input type="password" name="pass" class="form-control col-sm-10 w-25" placeholder="Your password" aria-label="Password" aria-describedby="basic-addon1" size="20" />
     </div>
   </div>
   <div class="mb-3 row">
@@ -86,7 +92,6 @@
     <div class="col-sm-10">
     <input type="submit" class = "btn btn-primary" value= "Log In">
     </div>
-    <input type="hidden" value = "true" name = "submitted">
   </div>
   
 

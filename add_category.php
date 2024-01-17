@@ -1,91 +1,65 @@
 <?php 
-include('connection.php');
+include("connection.php");
 ?>
 
 <!DOCTYPE html>
-    <head>
-        <title>Product</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-<body>
-    <?php 
-        if(isset($_GET['product_name']))
+<head>
+    <title>Insert</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>    
+
+<?php
+
+    if(isset($_GET['category_name'])){
+        $catagory_name = $_GET['category_name'];
+        $catagory_entrydate = $_GET['category_entrydate'];
+        $sql = "INSERT INTO catagory(category_name,category_entrydate) VALUES('$catagory_name','$catagory_entrydate')";  
+
+        if(mysqli_query($conn,$sql))
         {
-            $product_name = $_GET['product_name'];
-            $product_category = $_GET['product_category'];
-            $product_code = $_GET['product_code'];
-            $product_entry_date = $_GET['product_entry_date'];
-            $sql = "INSERT INTO product (product_name,product_category,product_code,product_entry_date) 
-            VALUES('$product_name','$product_category','$product_code','$product_entry_date')";
-            if($conn->query($sql)==TRUE)
-                    {
-                        echo "
-                <div class='alert alert-success'>
-                <div class = 'row'>
-                <div><strong>Inserted successfully!</strong></div>              
-                </div>
+            echo "
+            <div class='alert alert-success alert-dismissible fade show'>
                 
-                </div>
-                " ;
-                    }
-                    else
-                    {
-                        echo"Failed!"; 
-                    }
-            
+                        <div class = 'row'>
+                            <div class = 'col-sm-11'>
+                            <strong>Data inserted!</strong>
+                            </div>
+                            <div class = 'col-sm-1'>
+                            <button type= 'button' class='btn-close' data-bs-dismiss='alert'></button>
+                            </div>
+                        </div>
+                        </div>";
         }
+    }
 
-    ?>
 
-    <?php 
-        $sql = "SELECT * FROM catagory";
-        $query = $conn->query($sql); 
-    ?>
-    <div class = "container">
-    <form action = "<?php echo $_SERVER['PHP_SELF']?>" method = "GET"> 
+
+
+?>
+
+<div class = "container p-3">
+<h3>Add category for product</h3>
+<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="GET">
     <br>
     <div class="mb-3 row">
-    <label for="inputEmail" class="col-sm-2 col-form-label">Product Name</label>
+    <label for="inputEmail" class="col-sm-2 col-form-label">Add Catagory</label>
     <div class="col-sm-10">
-    <input type="text" name="product_name" class="form-control col-sm-10" placeholder="Your product" aria-label="Email" aria-describedby="basic-addon1" size="20" />
-    </div>
-    </div>
-    <div class="mb-3 row">
-    <label for="inputEmail" class="col-sm-2 col-form-label">Choose one from here</label>
-    <div class="col-sm-10">
-    <select name="product_category" class = "form-select">
-        <?php 
-
-            while($data = mysqli_fetch_array($query)){
-            $id = $data['id'];
-            $catagory_name = $data['category_name'];
-            echo "<option name = '$id'>$catagory_name</option>";
-            }
-        ?>
-    </select>
-    </div>
-    </div>
-    
-    <br>
-    <div class="mb-3 row">
-    <label for="inputEmail" class="col-sm-2 col-form-label">Product Code</label>
-    <div class="col-sm-10">
-    <input type="text" name="product_code" class="form-control col-sm-10" placeholder="Product code" aria-label="Email" aria-describedby="basic-addon1" size="20" />
+    <input type="text" name="category_name" class="form-control col-sm-10 w-25" placeholder="Category name" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
     </div>
     <br>
     <div class="mb-3 row">
-    <label for="inputEmail" class="col-sm-2 col-form-label">Product Entry Date</label>
+    <label for="inputEmail" class="col-sm-2 col-form-label">Entry Date</label>
     <div class="col-sm-10">
-    <input type="date" name="product_entry_date" class="form-control col-sm-10" placeholder="Product entry date" aria-label="Email" aria-describedby="basic-addon1" size="20" />
+    <input type="date" name="category_entrydate" class="form-control col-sm-10 w-25" placeholder="Date" aria-label="Email" aria-describedby="basic-addon1" size="20" />
     </div>
     </div>
+    <br>
     <input type = "submit" class = "btn btn-success" value ="submit">
-
 </form>
 
-    </div>
-
-</body>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</html>

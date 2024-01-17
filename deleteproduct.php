@@ -13,10 +13,10 @@ include('connection.php');
 <html>
 
 <?php
-if(isset($_GET['user_id']))
+if(isset($_GET['product_id']))
                 {
-                    $user_id = $_GET['user_id'];
-                    $sql1 = "DELETE FROM user WHERE user_id = $user_id";
+                    $product_id = $_GET['product_id'];
+                    $sql1 = "DELETE FROM product WHERE product_id = $product_id";
                     $delete = mysqli_query($conn,$sql1);
                     if($delete)
                 {
@@ -30,7 +30,7 @@ if(isset($_GET['user_id']))
                     </div>
 
                     ";
-                    header('location:userlist.php');
+                    header('location:list_of_product.php');
                 }
                 }
 
